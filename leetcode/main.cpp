@@ -11,7 +11,7 @@
 #include<unordered_map>
 #include<stack>
 #include<bitset>
-#define CATCH_CONFIG_MAIN
+#define CATCH_CONFIG_RUNNER
 #include"catch.hpp"
 using namespace std;
 #define nill -1
@@ -510,42 +510,58 @@ public:
 private:
 	int preval=INT_MIN;
 };
+// Init an empty set.use own main with catch https://github.com/catchorg/Catch2/blob/master/docs/own-main.md#top
 
-//int main() {
-//	// Init an empty set.
-//	Solution s;
-//	vector<vector<int>> re;
-//	//vector<int> input;
-//	int x = -1;
-//	unsigned int y = 2;
-//	vector<int> input;
-//	input.push_back(1);
-//	input.push_back(3);
-//	input.push_back(2);
-//	input.push_back(5);
-//	TreeNode* root = s.contructTree(input);
-//	input.clear();
-//	input.push_back(5);
-//	input.push_back(4); 
-//	input.push_back(8);
-//	input.push_back(11);
-//	input.push_back(-1);
-//	input.push_back(13);
-//	input.push_back(4);
-//	input.push_back(7);
-//	input.push_back(2);
-//	input.push_back(-1);
-//	input.push_back(-1);
-//	input.push_back(-1);
-//	input.push_back(1);
-//	
-//	cout<<s.hasPathSum(s.contructTree(input), 22)<<endl;
-//	//s.ipToCIDR("255.0.0.16", 8);
-//	//s.ipToCIDR("191.238.225.189",342);
-//	system("pause");
-//	return 0;
-//}
-TEST_CASE("pathsum", "[s.hasPathSum]") {
+int main(int argc, char* argv[])
+{
+	Catch::Session session; // There must be exactly one instance
+
+	int height = 0; // Some user variable you want to be able to set
+
+					// Build a new parser on top of Catch's
+	auto cli
+		= session.cli() // Get Catch's composite command line parser
+		| Catch::clara::detail::Opt(height, "height") // bind variable to a new option, with a hint string
+		["-g"]["--height"]    // the option names it will respond to
+		("how high?");        // description string for the help output
+
+							  // Now pass the new composite back to Catch so it uses that
+	session.cli(cli);
+
+	// Let Catch (using Clara) parse the command line
+	int returnCode = session.applyCommandLine(argc, argv);
+	if (returnCode != 0) // Indicates a command line error
+		return returnCode;
+	
+	Solution s;
+	vector<vector<int>> re;
+	int x = -1;
+	unsigned int y = 2;
+	vector<int> input;
+	input.clear();
+	input.push_back(5);
+	input.push_back(4); 
+	input.push_back(8);
+	input.push_back(11);
+	input.push_back(-1);
+	input.push_back(13);
+	input.push_back(4);
+	input.push_back(7);
+	input.push_back(2);
+	input.push_back(-1);
+	input.push_back(-1);
+	input.push_back(-1);
+	input.push_back(1);
+	
+	cout<<s.hasPathSum(s.contructTree(input), 22)<<endl;
+
+	if (height > 0)
+		std::cout << "height: " << height << std::endl;
+
+	system("pause");
+	return session.run();
+}
+TEST_CASE("pathsum", "[PathSum]") {
 	vector<int> input;
 	input.push_back(5);
 	input.push_back(4);
