@@ -11,6 +11,7 @@
 #include<unordered_map>
 #include<stack>
 #include<bitset>
+#define CATCH_CONFIG_MAIN
 #include"catch.hpp"
 using namespace std;
 #define nill -1
@@ -510,22 +511,44 @@ private:
 	int preval=INT_MIN;
 };
 
-int main() {
-	// Init an empty set.
-	Solution s;
-	vector<vector<int>> re;
-	//vector<int> input;
-	int x = -1;
-	unsigned int y = 2;
+//int main() {
+//	// Init an empty set.
+//	Solution s;
+//	vector<vector<int>> re;
+//	//vector<int> input;
+//	int x = -1;
+//	unsigned int y = 2;
+//	vector<int> input;
+//	input.push_back(1);
+//	input.push_back(3);
+//	input.push_back(2);
+//	input.push_back(5);
+//	TreeNode* root = s.contructTree(input);
+//	input.clear();
+//	input.push_back(5);
+//	input.push_back(4); 
+//	input.push_back(8);
+//	input.push_back(11);
+//	input.push_back(-1);
+//	input.push_back(13);
+//	input.push_back(4);
+//	input.push_back(7);
+//	input.push_back(2);
+//	input.push_back(-1);
+//	input.push_back(-1);
+//	input.push_back(-1);
+//	input.push_back(1);
+//	
+//	cout<<s.hasPathSum(s.contructTree(input), 22)<<endl;
+//	//s.ipToCIDR("255.0.0.16", 8);
+//	//s.ipToCIDR("191.238.225.189",342);
+//	system("pause");
+//	return 0;
+//}
+TEST_CASE("pathsum", "[s.hasPathSum]") {
 	vector<int> input;
-	input.push_back(1);
-	input.push_back(3);
-	input.push_back(2);
 	input.push_back(5);
-	TreeNode* root = s.contructTree(input);
-	input.clear();
-	input.push_back(5);
-	input.push_back(4); 
+	input.push_back(4);
 	input.push_back(8);
 	input.push_back(11);
 	input.push_back(-1);
@@ -537,10 +560,7 @@ int main() {
 	input.push_back(-1);
 	input.push_back(-1);
 	input.push_back(1);
-	
-	cout<<s.hasPathSum(s.contructTree(input), 22)<<endl;
-	//s.ipToCIDR("255.0.0.16", 8);
-	//s.ipToCIDR("191.238.225.189",342);
-	system("pause");
-	return 0;
+	Solution s;
+	REQUIRE( s.hasPathSum(s.contructTree(input), 22) == true );
+
 }
